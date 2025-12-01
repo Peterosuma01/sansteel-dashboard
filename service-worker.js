@@ -1,4 +1,4 @@
-const CACHE_NAME = 'sunshine-goldmine-v2.0.0';
+const CACHE_NAME = 'sunshine-goldmine-v3.0.0';
 const URLS_TO_CACHE = [
   '/sansteel-dashboard/',
   '/sansteel-dashboard/index.html',
