@@ -185,22 +185,42 @@
   </div>
   
   <!-- App Frame -->
-  <iframe 
-    id="app-frame"
-    src="https://script.google.com/macros/s/AKfycbzsxajJyN5icrrkV0ypx1GNQI9GVGuZ-l4QdKSGFTL42tpAgPU8H4KGuzjl5J5FvKFh/exec"
-    allow="clipboard-write"
-  ></iframe>
+ <iframe 
+  id="app-frame"
+  src=""
+  allow="clipboard-write"
+></iframe>
+
+<script>
+  // ============================================
+  // 🔧 PASS URL PARAMETERS TO IFRAME
+  // ============================================
+  const appFrame = document.getElementById('app-frame');
+  const loading = document.getElementById('loading');
   
-  <script>
-    // Hide loading screen when iframe loads
-    const appFrame = document.getElementById('app-frame');
-    const loading = document.getElementById('loading');
-    
-    appFrame.addEventListener('load', function() {
-      setTimeout(() => {
-        loading.classList.add('hidden');
-      }, 500);
-    });
+  // Get the current page URL parameters (like ?ref=REF123456)
+  const urlParams = new URLSearchParams(window.location.search);
+  
+  // Base Google Apps Script URL
+  const baseScriptUrl = 'https://script.google.com/macros/s/AKfycbzsxajJyN5icrrkV0ypx1GNQI9GVGuZ-l4QdKSGFTL42tpAgPU8H4KGuzjl5J5FvKFh/exec';
+  
+  // Build iframe URL with parameters
+  let iframeUrl = baseScriptUrl;
+  if (urlParams.toString()) {
+    iframeUrl += '?' + urlParams.toString();
+  }
+  
+  // Set iframe source with parameters
+  appFrame.src = iframeUrl;
+  console.log('Loading iframe with URL:', iframeUrl);
+  // ============================================
+  
+  // Hide loading screen when iframe loads
+  appFrame.addEventListener('load', function() {
+    setTimeout(() => {
+      loading.classList.add('hidden');
+    }, 500);
+  });
     
     // PWA Install Prompt
     let deferredPrompt;
@@ -264,5 +284,6 @@
   </script>
 </body>
 </html>
+
 
 
